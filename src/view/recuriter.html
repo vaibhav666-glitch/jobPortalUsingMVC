@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./style.css" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body class="bg-blue-800">
+    <nav class="bg-blue-900 flex justify-between p-4 border-b-2 border-blue-950 shadow-xl shadow-blur">
+        <div class="flex justify-start ">
+          <a class="text-white " href="#">
+            <img src="../image_processing20210901-7823-90tz4q.gif" class="w-10 h-10" alt="easily"></a>
+        </div>
+        <div class="flex justify-center mr-32">
+          <ul class="flex justify-between space-x-4">
+            <li>
+                <a href="./index.html" class="text-white cursor-pointer">Home</a>
+            </li>
+            <li>
+              <a href="./jobs.html" class="text-white cursor-pointer">Jobs</a>
+            </li>
+            <li>
+              <a href="./recuriter.html" class="text-white cursor-pointer">Recruiter</a>
+            </li>
+          </ul>
+        </div>
+        <div class="flex justify-end">
+          <form action="/search" class="flex items-center">
+            <input id="search-box" type="search" name="q" placeholder="search" class="px-2 py-1 rounded-l border border-gray-300">
+            <button type="submit" class="px-2 py-1 bg-blue-500 text-white rounded-r">Search</button>
+          </form>
+        </div>
+      </nav>
+</body>
+</html>
