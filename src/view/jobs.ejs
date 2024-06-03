@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./style.css" rel="stylesheet">
+    <title>jobs</title>
+</head>
+<body class="bg-blue-800">
+  <nav class="bg-blue-900 flex justify-between p-4 border-b-2 border-blue-950 shadow-xl shadow-blur">
+      <div class="flex justify-start">
+          <a class="text-white" href="#">
+              <img src="../image_processing20210901-7823-90tz4q.gif" class="w-10 h-10" alt="easily">
+          </a>
+      </div>
+      <div class="flex justify-center mr-32">
+          <ul class="flex justify-between space-x-4">
+              <li><a href="./index" class="text-white cursor-pointer">Home</a></li>
+              <li><a href="./jobs" class="text-white cursor-pointer">Jobs</a></li>
+              <li><a href="./recruiter" class="text-white cursor-pointer">Recruiter</a></li>
+          </ul>
+      </div>
+      <div class="flex justify-end">
+          <form action="/search" class="flex items-center">
+              <input id="search-box" type="search" name="q" placeholder="search" class="px-2 py-1 rounded-l border border-gray-300">
+              <button type="submit" class="px-2 py-1 bg-blue-500 text-white rounded-r">Search</button>
+          </form>
+      </div>
+  </nav>
+
+  <div class="jobList flex flex-wrap gap-4 p-4">
+    <% jobs.forEach(job=>{ %>
+
+        <div class="jobMargin p-8 rounded-lg shadow-md bg-blue-900">
+            <div class="jobBox flex flex-col items-start justify-between bg-purple-400 p-4 rounded-lg">
+                <div class="actively-Hiring text-xs font-semibold bg-green-500 text-white py-1 px-2 rounded">
+                    Actively Hiring
+                </div>
+                <div class="company text-xl font-semibold mt-4">
+                    <h1 class="companyName"><%= job.name %></h1>
+                </div>
+                <div class="jobRole text-lg font-medium mt-4">
+                    <h2 class="roleName"><%= job.role %></h2>
+                </div>
+                <div class="location-pay mt-2">
+                    <h2 class="location text-white font-bold "><%= job.location %></h2>
+                  
+                </div>
+                <div class="location-pay">
+              
+                  <h2 class="pay text-white "><%= job.salary %></h2>
+              </div>
+                <div class="skillBox flex items-center mt-4">
+                    <div class="skills bg-blue-300 text-black text-xs font-semibold py-1 px-2 rounded mr-2"><%=job.skills[0] %></div>
+                    <div class="skills bg-blue-300 text-black text-xs font-semibold py-1 px-2 rounded"><%=job.skills[1] %></div>
+                </div>
+                <div class="details mt-4">
+                    <button class="viewDetails bg-blue-500 text-white py-2 px-4 rounded font-semibold hover:bg-blue-600"><%=job.details %></button>
+                </div>
+            </div>
+        </div>
+  <%  }) %>
+      
+
+      
+  </div>
+</body>
+</html>
