@@ -21,7 +21,7 @@ app.get("/index",(req,res)=>{
 app.get("/login",recruiterController.getLogin)
 app.get("/index",recruiterController.getRegister);
 app.post("/login",recruiterController.postRegister);
-
+app.post("/index",recruiterController.postLogin);
 app.get("/add-job",productController.getAddJob)
 app.post("/jobs",productController.postAddJob)
 app.get("/jobs",productController.getProducts)

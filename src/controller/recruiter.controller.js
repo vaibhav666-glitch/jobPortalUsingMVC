@@ -12,4 +12,10 @@ export class RecruiterController{
         RecuriterModel.add(name,email,password);
         res.render('login');
     }
+    postLogin(req,res){
+        const {email,password}=req.body;
+        const recruiter=RecuriterModel.isValidRecruiter(email,password);
+        if(recruiter)
+            res.render('index');
+    }
 }

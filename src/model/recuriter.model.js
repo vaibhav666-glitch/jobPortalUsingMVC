@@ -11,7 +11,10 @@ export class RecuriterModel{
         users.push(newUser);
 
     }
-
+    static isValidRecruiter(email,password)
+    {
+       return users.find(u=>u.email==email, u.password==password);
+    }
 
 }
 var users=[];
