@@ -13,6 +13,11 @@ export class ProductModel{
        // console.log(arr);
         return jobs;
     }
+    static add(jobObj){
+       let newJob=new ProductModel(jobs.length+1,jobObj.company,jobObj.job_designation,jobObj.location,jobObj.salary,jobObj.skills_required,jobObj.apply_by);
+       
+        jobs.push(newJob);
+    }
 
 }
 let jobs=[{
