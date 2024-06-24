@@ -1,8 +1,8 @@
 export class RecuriterModel{
-    constructor(id,email,name,password){
+    constructor(id,name,email,password){
         this.id=id;
-        this.email = email;
         this.name = name;
+        this.email = email;
         this.password = password;
     }
     static add(name,email,password)
@@ -13,7 +13,9 @@ export class RecuriterModel{
     }
     static isValidRecruiter(email,password)
     {
-       return users.find(u=>u.email==email, u.password==password);
+       // console.log(users);
+        return users.find(u => u.email == email && u.password==password);
+        
     }
 
 }

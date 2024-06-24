@@ -1,8 +1,9 @@
 import express from 'express';
 import path from 'path';
-import expressEjsLayouts from 'express-ejs-layouts';
 import { ProductController } from './src/controller/product.controller.js';
 import { RecruiterController } from './src/controller/recruiter.controller.js';
+import session from 'express-session';
+import { auth } from './src/middleware/auth.middleware.js';
 
 const app=express();
 
@@ -14,18 +15,34 @@ app.set('views', path.join(path.resolve(), 'src','view'));
 // create an instance of ProductController
 const productController=new ProductController();
 const recruiterController=new RecruiterController();
+
+app.use(express.static('src/view'));
+app.use(session({
+    secret: 'SecretKey',
+    resave: false,
+    saveUninitialized: true,
+    cookie:{secure:false},
+
+})
+);
+
+
+
 app.get("/index",(req,res)=>{
     res.render("index");
     
 });
-app.get("/login",recruiterController.getLogin)
+
 app.get("/index",recruiterController.getRegister);
 app.post("/login",recruiterController.postRegister);
+app.get("/login",recruiterController.getLogin)
 app.post("/index",recruiterController.postLogin);
-app.get("/add-job",productController.getAddJob)
-app.post("/jobs",productController.postAddJob)
-app.get("/jobs",productController.getProducts)
-app.use(express.static('src/view'));
+app.get("/add-job",auth,productController.getAddJob)
+app.post("/jobs",auth, productController.postAddJob)
+app.get("/jobs",auth, productController.getProducts)
+app.get("/logout",recruiterController.logout);
+app.get("/delete-job/:id",auth,productController.deleteJob);
+
 
 app.listen(3200,()=>{
     console.log('Server is running on port 3200');

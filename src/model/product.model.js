@@ -18,6 +18,10 @@ export class ProductModel{
        
         jobs.push(newJob);
     }
+    static delete(id){
+        let index = jobs.findIndex(job => job.id === id);
+        jobs.splice(index,1); 
+    }
 
 }
 let jobs=[{
