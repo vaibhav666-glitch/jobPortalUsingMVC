@@ -1,12 +1,24 @@
 export class ProductModel{
-    constructor(id,role,name,location,salary,skills,details){
-        this.id=id;
-        this.name=name;
-        this.role=role;
-        this.location=location;
-        this.salary=salary;
-        this.skills=skills;
-        this.details=details;
+    constructor(id,
+        jobCategory,
+        jobDesignation,
+        location,
+        companyName,
+        salary,
+        position,
+        skills,
+        applyBy
+       ){
+    this.id=id
+   this.jobCategory=jobCategory
+   this.jobDesignation=jobDesignation,
+   this.location=location
+   this.companyName=companyName
+   this.salary=salary
+   this.position=position
+   this.skills=skills
+   this.applyBy=applyBy
+   
     }
 
     static getAll(){
@@ -14,42 +26,69 @@ export class ProductModel{
         return jobs;
     }
     static add(jobObj){
-       let newJob=new ProductModel(jobs.length+1,jobObj.company,jobObj.job_designation,jobObj.location,jobObj.salary,jobObj.skills_required,jobObj.apply_by);
-       
+       let newJob=new ProductModel(jobs.length+1,jobObj.jobCategory,
+        jobObj.jobDesignation,
+        jobObj.location,
+        jobObj.companyName,
+        jobObj.salary,
+        jobObj.position,
+        jobObj.skills,
+        jobObj.applyBy);
+
         jobs.push(newJob);
     }
     static delete(id){
-        let index = jobs.findIndex(job => job.id === id);
+        let index = jobs.findIndex(job => job.id == id);
+        console.log("i am index"+" "+index);
         jobs.splice(index,1); 
+    }
+    static getId(id)
+    {
+        let index = jobs.findIndex(job => job.id == id);
+        return jobs[index];
+        
+    }
+    static postUpdate(jobObj)
+    {
+        jobObj.id=Number(jobObj.id);
+        let index = jobs.findIndex(job => job.id == jobObj.id);
+        jobs[index]=jobObj;
+        console.log(jobs);
     }
 
 }
 let jobs=[{
     id:1,
-    name:"CodingNinja",
-    role:"Software Developer",
+    jobCategory:"Tech",
+    jobDesignation:"Software Engineer",
     location:"Delhi",
+    companyName:"CodingNinja",
     salary:"10LPA",
+    position:"10",
     skills:["Python","Java"],
-    details:"Good in coding"
+    applyBy:"2020-12-31",
+   
 },
     {
         id:2,
-        name:"CodingWarrior",
-        role:"Data Scientist",
-        location:"Banglore",
-        salary:"15LPA",
-        skills:["Python","R"],
-        details:"Good in Data Analysis"
+        jobCategory:"Tech",
+        jobDesignation:"MERN",
+        location:"Gurgaon",
+        companyName:"Google",
+        salary:"20LPA",
+        position:"10",
+        skills:["Python","Java","JavaScript"],
+        applyBy:"2020-12-31",
     },
     {
         id:3,
-        name:"Google",
-        role:"Software Developer",
-        location:"Hyderabad",
-        salary:"20LPA",
-        skills:["Python","Java"],
-        details:"Good in coding"
-        
+        jobCategory:"Non-Tech",
+        jobDesignation:"HR",
+        location:"Noida",
+        companyName:"Amazon",
+        salary:"10LPA",
+        position:"8",
+        skills:["softSkills"],
+        applyBy:"2020-12-31",
     }
 ]

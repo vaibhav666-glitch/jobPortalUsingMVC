@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="./style.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-blue-800">
+  <nav class="bg-blue-900 flex justify-between items-center p-4 border-b-2 border-blue-950 shadow-xl">
+      <div class="flex justify-start">
+          <a class="text-white" href="#">
+              <i class="fa-solid fa-user"></i>
+          </a>
+      </div>
+      <div class="hidden lg:flex justify-center mr-32">
+          <ul class="flex justify-between space-x-4">
+              <li>
+                  <a href="./index" class="text-white cursor-pointer">Home</a>
+              </li>
+              <li>
+                  <a href="./jobs" class="text-white cursor-pointer">Jobs</a>
+              </li>
+              <li class="relative inline-block">
+                  <!-- Hidden checkbox for toggling -->
+                  <input type="checkbox" id="recruiterToggle" class="peer hidden" />
+                  <label for="recruiterToggle" class="cursor-pointer px-4 text-white flex items-center">
+                      Recruiter
+                      <i class="fas fa-caret-down ml-2"></i>
+                  </label>
+                  <div
+                      class="absolute left-0 bg-white text-black mt-1 py-2 w-28 rounded-md shadow-lg hidden peer-checked:block">
+                      <a href="./login" class="block px-4 py-2 hover:bg-gray-200">Login</a>
+                      <a href="./add-job" class="block px-4 py-2 hover:bg-gray-200">Add Job</a>
+                  </div>
+              </li>
+          </ul>
+      </div>
+      <div class="hidden lg:flex justify-end">
+          <form action="/search" class="flex items-center">
+              <input id="search-box" type="search" name="q" placeholder="search"
+                  class="px-2 py-1 rounded-l border border-gray-300">
+              <button type="submit" class="px-2 py-1 bg-blue-500 text-white rounded-r">Search</button>
+          </form>
+      </div>
+      <!-- Hamburger Menu for Mobile -->
+      <div class="lg:hidden flex items-center">
+          <button id="hamburger-btn" class="text-white focus:outline-none">
+              <i class="fas fa-bars text-2xl"></i>
+          </button>
+      </div>
+  </nav>
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden lg:hidden bg-blue-900">
+      <ul class="flex flex-col items-start space-y-2 p-4">
+          <li>
+              <a href="./index" class="text-white cursor-pointer">Home</a>
+          </li>
+          <li>
+              <a href="./jobs" class="text-white cursor-pointer">Jobs</a>
+          </li>
+          <li class="relative inline-block">
+              <input type="checkbox" id="mobileRecruiterToggle" class="peer hidden" />
+              <label for="mobileRecruiterToggle" class="cursor-pointer text-white flex items-center">
+                  Recruiter
+                  <i class="fas fa-caret-down ml-2"></i>
+              </label>
+              <div
+                  class="bg-white text-black mt-1 py-2 w-28 rounded-md shadow-lg hidden peer-checked:block">
+                  <a href="./login" class="block px-4 py-2 hover:bg-gray-200">Login</a>
+                  <a href="./add-job" class="block px-4 py-2 hover:bg-gray-200">Add Job</a>
+              </div>
+
+          </li>
+          <li>
+              <form action="/search" class="flex items-center w-full">
+                  <input id="search-box" type="search" name="q" placeholder="search"
+                      class="px-2 py-1 w-full rounded border border-gray-300">
+                  <button type="submit" class="mx-2 px-2 py-1 bg-blue-500 text-white rounded w-full">Search</button>
+              </form>
+          </li>
+      </ul>
+  </div>
+ 
+  <div class="bg-white p-8 rounded-md shadow-xl w-full max-w-full  items-center">
+    <div class="text-center mb-8">
+        <h1 class="text-2xl font-bold text-gray-800">Applicant Details</h1>
+    </div>
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white border border-gray-300">
+           
+            <thead>
+                <tr>
+                    <th class="py-2 px-4 bg-gray-200 text-gray-600 font-bold uppercase text-sm text-left">Id</th>
+                    <th class="py-2 px-4 bg-gray-200 text-gray-600 font-bold uppercase text-sm text-left">Name</th>
+                    <th class="py-2 px-4 bg-gray-200 text-gray-600 font-bold uppercase text-sm text-left">Email</th>
+                    <th class="py-2 px-4 bg-gray-200 text-gray-600 font-bold uppercase text-sm text-left">Contact Number</th>
+                    <th class="py-2 px-4 bg-gray-200 text-gray-600 font-bold uppercase text-sm text-left">Resume</th>
+                </tr>
+            </thead>
+           <% applicants.forEach(applicant=>{ %>
+            <tbody>
+                <tr>
+                    <td class="py-2 px-4 border-b border-gray-200 text-gray-700"><%= applicant.id %></td>
+                    <td class="py-2 px-4 border-b border-gray-200 text-gray-700"><%= applicant.name %></td>
+                    <td class="py-2 px-4 border-b border-gray-200 text-gray-700"><%= applicant.email %></td>
+                    <td class="py-2 px-4 border-b border-gray-200 text-gray-700"><%= applicant.contactNo %></td>
+                    <td class="py-2 px-4 border-b border-gray-200">
+                        <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+                            <a href="<%= applicant.resume %>" target="_blank" class="text-white">Open Resume</a>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+       <% }) %>
+        </table>
+    </div>
+</div>
+
+
+  <script>
+    document.getElementById('hamburger-btn').onclick = () => {
+        document.getElementById('mobile-menu').classList.toggle('hidden');
+    }
+</script>
+    </body>
+    </html>

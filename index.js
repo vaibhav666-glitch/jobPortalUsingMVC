@@ -4,6 +4,8 @@ import { ProductController } from './src/controller/product.controller.js';
 import { RecruiterController } from './src/controller/recruiter.controller.js';
 import session from 'express-session';
 import { auth } from './src/middleware/auth.middleware.js';
+import { ApplicantController } from './src/controller/applicant.controller.js';
+import { uploadFile } from './src/middleware/fileUpload.middleware.js';
 
 const app=express();
 
@@ -15,8 +17,11 @@ app.set('views', path.join(path.resolve(), 'src','view'));
 // create an instance of ProductController
 const productController=new ProductController();
 const recruiterController=new RecruiterController();
+const applicantController=new ApplicantController();
+
 
 app.use(express.static('src/view'));
+app.use(express.static('public'));
 app.use(session({
     secret: 'SecretKey',
     resave: false,
@@ -29,7 +34,7 @@ app.use(session({
 
 
 app.get("/index",(req,res)=>{
-    res.render("index");
+    res.render("index",{name:req.session.name});
     
 });
 
@@ -37,11 +42,18 @@ app.get("/index",recruiterController.getRegister);
 app.post("/login",recruiterController.postRegister);
 app.get("/login",recruiterController.getLogin)
 app.post("/index",recruiterController.postLogin);
+
+
+app.get("/jobs", productController.getProducts)
+app.get("/updateJob:id",auth,productController.getUpdateJob);
 app.get("/add-job",auth,productController.getAddJob)
-app.post("/jobs",auth, productController.postAddJob)
-app.get("/jobs",auth, productController.getProducts)
+app.post("/add-jobs",auth, productController.postAddJob)
+app.post("/update-job",auth, productController.postUpdateJob);
+app.get("/delete-job:id",auth,productController.deleteJob);
+app.get("/jobDetails:id",productController.getDetails);
+
+app.post("/upload-resume",uploadFile.single("resume"),applicantController.uploadResume);
 app.get("/logout",recruiterController.logout);
-app.get("/delete-job/:id",auth,productController.deleteJob);
 
 
 app.listen(3200,()=>{
