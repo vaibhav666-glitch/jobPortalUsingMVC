@@ -6,6 +6,7 @@ import session from 'express-session';
 import { auth } from './src/middleware/auth.middleware.js';
 import { ApplicantController } from './src/controller/applicant.controller.js';
 import { uploadFile } from './src/middleware/fileUpload.middleware.js';
+import { email } from './src/middleware/sendEmail.middleware.js';
 
 const app=express();
 
@@ -52,7 +53,7 @@ app.post("/update-job",auth, productController.postUpdateJob);
 app.get("/delete-job:id",auth,productController.deleteJob);
 app.get("/jobDetails:id",productController.getDetails);
 
-app.post("/upload-resume",uploadFile.single("resume"),applicantController.uploadResume);
+app.post("/upload-resume",uploadFile.single("resume"),email, applicantController.uploadResume);
 app.get("/logout",recruiterController.logout);
 
 

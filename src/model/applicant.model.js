@@ -14,6 +14,7 @@ export class ApplicantModel{
         applicants.push(newApplicant);
         return applicants;
     }
+   
 
 }
 var applicants=[];

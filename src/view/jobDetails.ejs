@@ -100,12 +100,23 @@
 
         <div class="jobMargin p-8 rounded-lg shadow-md bg-blue-900">
             <div class="jobBox flex flex-col items-start justify-between bg-purple-400 p-4 rounded-lg">
-                <div class="details mt-4">
+                <% if( locals.name) { %>
+
+                <div class="details mt-4 ">
                     <button class="viewDetails bg-blue-500 text-white py-2 px-4 rounded font-semibold hover:bg-blue-600"><a href="./delete-job<%= job.id %>">delete</a></button>
                 </div>
-                <div class="details mt-4">
+                <div class="details mt-4 ">
                     <button class="viewDetails bg-blue-500 text-white py-2 px-4 rounded font-semibold hover:bg-blue-600"><a href="./updateJob<%= job.id %>">update</a></button>
                 </div>
+                <% } else { %>
+                
+                    <div class="details mt-4 hidden ">
+                        <button class="viewDetails bg-blue-500 text-white py-2 px-4 rounded font-semibold hover:bg-blue-600"><a href="./delete-job<%= job.id %>">delete</a></button>
+                    </div>
+                    <div class="details mt-4 hidden">
+                        <button class="viewDetails bg-blue-500 text-white py-2 px-4 rounded font-semibold hover:bg-blue-600"><a href="./updateJob<%= job.id %>">update</a></button>
+                    </div>
+                <% } %>
                 <div class="actively-Hiring text-xs font-semibold bg-green-500 text-white py-1 px-2 rounded">
                     Actively Hiring
                 </div>
